@@ -3,7 +3,10 @@ description: 'Provide a description here'
 author: 'Your name or organization here'
 inputs:
   owner:
-    description: The user to create the deployment
+    description: The owner of the repository
+    required: true
+  repo:
+    description: The repository name
     required: true
   ref:
     description: The ref to deploy. This can be a branch, tag, or SHA.
