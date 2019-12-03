@@ -2,9 +2,18 @@ name: 'Your name here'
 description: 'Provide a description here'
 author: 'Your name or organization here'
 inputs:
-  myInput:              # change this
-    description: 'input description here'
-    default: 'default value if applicable'
+  owner:
+    description: The user to create the deployment
+    required: true
+  ref:
+    description: The ref to deploy. This can be a branch, tag, or SHA.
+    required: true
+  environment:
+    description: Name for the target deployment environment (e.g., `production`, `staging`, `qa`).
+    required: true
+  payload:
+    description: JSON string to include in the deployment payload.
+    required: false
 runs:
   using: 'node12'
   main: 'lib/main.js'
