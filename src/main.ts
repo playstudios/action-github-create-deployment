@@ -20,6 +20,7 @@ async function run() {
         auto_merge: false,
         required_contexts: <string[]>[],
         payload: core.getInput('payload'),
+        task: 'deploy:github',
     });
     if (deploymentResponse.status != 201) {
         core.setFailed(`createDeployment failed with status core ${deploymentResponse.status}`)
