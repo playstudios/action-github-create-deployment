@@ -1,6 +1,5 @@
-name: 'Your name here'
-description: 'Provide a description here'
-author: 'Your name or organization here'
+name: 'Create Deployment'
+description: 'Create a GitHub deployment'
 inputs:
   owner:
     description: The owner of the repository
@@ -11,12 +10,25 @@ inputs:
   ref:
     description: The ref to deploy. This can be a branch, tag, or SHA.
     required: true
+  task:
+    description: Deployment task
+    required: false
+    default: deploy:github
   environment:
     description: Name for the target deployment environment (e.g., `production`, `staging`, `qa`).
     required: true
-  payload:
-    description: JSON string to include in the deployment payload.
+  application:
+    description: Name of the target application
     required: false
+    default: ''
+  values_file:
+    description: File path relative to the root of the deployment repo containing the helm values file
+    required: false
+    default: ''
+  key_paths:
+    description: Comma separated string of paths to keys in the values file
+    required: false
+    default: ''
 runs:
   using: 'node12'
   main: 'lib/main.js'

@@ -6,7 +6,12 @@ async function run() {
     let owner = core.getInput('owner');
     let repo = core.getInput('repo');
     let ref = core.getInput('ref');
+
+    let task = core.getInput('task');
     let environment = core.getInput('environment');
+    let application = core.getInput('application');
+    let values_file = core.getInput('values_file');
+    let key_paths = core.getInput('key_paths');
 
     core.info(`Deploying ${owner}/${repo}@${ref} to ${environment}`);
 
@@ -15,11 +20,18 @@ async function run() {
         owner,
         repo,
         ref,
-        environment,
 
         auto_merge: false,
         required_contexts: <string[]>[],
-        payload: core.getInput('payload'),
+
+        task,
+        environment,
+
+        payload: JSON.stringify({
+            application,
+            values_file,
+            key_paths,
+        }, (_, value: any) => value == '' ? undefined : value),
     });
     if (deploymentResponse.status != 201) {
         core.setFailed(`createDeployment failed with status core ${deploymentResponse.status}`)
